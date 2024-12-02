@@ -53,4 +53,11 @@ class Slider extends CrudModel
   {
     return json_decode($value);
   }
+
+  public function getCacheClearableData()
+  {
+    $baseUrls = [config("app.url")];
+    $urls = ['urls' => $baseUrls];
+    return $urls;
+  }
 }
