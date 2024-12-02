@@ -57,10 +57,6 @@ class Slider extends CrudModel
   public function getCacheClearableData()
   {
     $baseUrls = [config("app.url")];
-//    falta la funcicion getUrlAttribute
-//    if (!$this->wasRecentlyCreated) {
-//      $baseUrls[] = $this->url;
-//    }
     $urls = ['urls' => $baseUrls];
     return $urls;
   }
