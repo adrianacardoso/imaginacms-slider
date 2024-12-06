@@ -2,7 +2,13 @@
   @parent
   <script>
     $(document).ready(function () {
-      let vmslider = $('#{{ $slider->system_name }}');
+      let vmslider = $('#{{ $slider->system_name }}');//Get the slider by ID
+      let isMobile = window.innerWidth <= 767 ? true : false; // Define if current window size is mobile or not
+      //Filter items by responsive before start the owl
+      vmslider.find(`.owl-d-${isMobile ? 'desktop' : 'mobile'}`).each(function () {
+        $(this).remove();
+      })
+      //start owl
       vmslider.owlCarousel({
         stagePadding: {!!$stagePadding!!},
         items: 1,
@@ -20,11 +26,11 @@
         touchDrag: {!! $touchDrag ? 'true' : 'false' !!},
         {!! !empty($navText) ? 'navText: '.$navText."," : "" !!}
       });
-      vmslider.find('.owl-dot').each(function(index) {
+      vmslider.find('.owl-dot').each(function (index) {
         $(this).attr('aria-label', index + 1);
       });
-      vmslider.find('.owl-next').attr('aria-label','{{trans('slider::frontend.next')}}');
-      vmslider.find('.owl-prev').attr('aria-label','{{trans('slider::frontend.previous')}}');
+      vmslider.find('.owl-next').attr('aria-label', '{{trans('slider::frontend.next')}}');
+      vmslider.find('.owl-prev').attr('aria-label', '{{trans('slider::frontend.previous')}}');
     });
   </script>
 @stop
