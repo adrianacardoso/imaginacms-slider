@@ -2,7 +2,13 @@
   @parent
   <script>
     $(document).ready(function () {
-      let vmslider = $('#{{ $slider->system_name }}');
+      let vmslider = $('#{{ $slider->system_name }}');//Get the slider by ID
+      let isMobile = window.innerWidth <= 767 ? true : false; // Define if current window size is mobile or not
+      //Filter items by responsive before start the owl
+      vmslider.find(`.owl-d-${isMobile ? 'desktop' : 'mobile'}`).each(function () {
+        $(this).remove();
+      })
+      //start owl
       vmslider.owlCarousel({
         stagePadding: {!!$stagePadding!!},
         items: 1,
